@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+import requests
 import copy
 
 class Student:
@@ -31,4 +32,14 @@ class Student:
     def apply_extension(self, days):
             old_end_date = copy.copy(self.end_date)
             self.end_date += timedelta(days=days) 
-            print(f"Old End Date: {old_end_date} | Updated End Date: {self.end_date}")   
+            print(f"Old End Date: {old_end_date} | Updated End Date: {self.end_date}")
+
+
+    def course_schedule(self):
+        response = requests.get(
+            f"https://company.com/course-schedule/{self._last_name}/{self._first_name}")
+
+        if response.ok:
+            return response.text
+        else:
+            return "Something went wrong with the request!"
