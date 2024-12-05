@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+import copy
 
 class Student:
     """
@@ -20,10 +21,14 @@ class Student:
 
     @property
     def email(self):
-            return f"{self._first_name.lower()}.{self._last_name.lower()}@email.com"
+        return f"{self._first_name.lower()}.{self._last_name.lower()}@email.com"
 
 
     def alert_santa(self):
         self.naughty_list = True
 
-    
+
+    def apply_extension(self, days):
+            old_end_date = copy.copy(self.end_date)
+            self.end_date += timedelta(days=days) 
+            print(f"Old End Date: {old_end_date} | Updated End Date: {self.end_date}")   
